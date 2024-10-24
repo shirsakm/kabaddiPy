@@ -21,6 +21,12 @@ import matplotlib.ticker as ticker
 from matplotlib.patches import Patch
 from matplotlib.lines import Line2D
 
+themes = {
+    'default': ['#B0D0E0', '#FFB3B3', '#333333'],
+    'dracula': ['#44475a', '#bd93f9', '#f8f8f2'],
+    'gruvbox': ['#282828', '#fb4934', '#ebdbb2'],
+    'nord': ['#2e3440', '#88c0d0', '#e5e9f0'],
+}
 
 class PKL:
     def __init__(self):
@@ -1114,7 +1120,7 @@ class PKL:
 
         return player_data, strong_zones, weak_zones
 
-    def _plot_player_zones_grid(self, player_id, season, zone_type='strong', court_color, lobby_color, line_color, fig=None, ax=None):
+    def _plot_player_zones_grid(self, player_id, season, court_color, lobby_color, line_color, zone_type='strong', fig=None, ax=None):
         season_directories = {
             1: "Season_PKL_Season_1_2014", 2: "Season_PKL_Season_2_2015", 3: "Season_PKL_Season_3_2016",
             4: "Season_PKL_Season_4_2016",
@@ -1219,13 +1225,15 @@ class PKL:
         # plt.show()
         return fig, ax, player_data
 
-    def plot_player_zones(self, player_id, season, zone_type='strong', court_color = '#B0D0E0', lobby_color = '#FFB3B3', line_color = '#333333'):
+    def plot_player_zones(self, player_id, season, zone_type='strong', colors=themes['default']):
         """
         Default color scheme:
             - Darker blue for court
             - Darker red for lobby
             - Dark gray for lines
         """ 
+        court_color, lobby_color, line_color = colors
+
         season_directories = {
             1: "Season_PKL_Season_1_2014", 2: "Season_PKL_Season_2_2015", 3: "Season_PKL_Season_3_2016",
             4: "Season_PKL_Season_4_2016",
@@ -1380,13 +1388,15 @@ class PKL:
 
         return team_data, strong_zones, weak_zones
 
-    def plot_team_zones(self, team_id, season, zone_type='strong', court_color = '#B0D0E0', lobby_color = '#FFB3B3'):
+    def plot_team_zones(self, team_id, season, zone_type='strong', colors=themes["default"]):
         """
         Default color scheme:
             - Darker blue for court
             - Darker red for lobby
             - Dark gray for lines
         """
+        court_color, lobby_color, line_color = colors
+
         season_directories = {
             1: "Season_PKL_Season_1_2014", 2: "Season_PKL_Season_2_2015", 3: "Season_PKL_Season_3_2016",
             4: "Season_PKL_Season_4_2016", 5: "Season_PKL_Season_5_2017", 6: "Season_PKL_Season_6_2018",
@@ -1754,13 +1764,15 @@ class PKL:
 
         plt.show()
 
-    def plot_player_zones_grid(self, player_id, season, zone_type='strong', court_color = '#B0D0E0', lobby_color = '#FFB3B3', line_color = '#333333', fig=None, ax=None):
+    def plot_player_zones_grid(self, player_id, season, zone_type='strong', colors=themes['default'], fig=None, ax=None):
         """
         Default color scheme:
             - Darker blue for court
             - Darker red for lobby
             - Dark gray for lines
         """
+        court_color, lobby_color, line_color = colors
+
         n_plots = len(player_ids)
 
         valid_plots = []
